@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity   // create table with following attribute
 @NoArgsConstructor         // anotation for contructor
@@ -16,13 +18,14 @@ import javax.persistence.*;
 @Setter                   // getter and setter annotation
 
 public class Book {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private int price;
     @Enumerated(EnumType.STRING)
     private Genre genre;
+    private boolean isIssued;
 
     @ManyToOne
     @JoinColumn
@@ -30,5 +33,10 @@ public class Book {
     Author author;
 
 
+    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
+    List<Transaction> transaction =new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn
+    LibraryCard card;
 }

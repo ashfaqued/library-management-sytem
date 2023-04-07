@@ -1,5 +1,7 @@
 package com.backendMarch.librarymanagementsytem.Controller;
 
+import com.backendMarch.librarymanagementsytem.DTO.BookRequestDto;
+import com.backendMarch.librarymanagementsytem.DTO.BookResponseDto;
 import com.backendMarch.librarymanagementsytem.Entity.Book;
 import com.backendMarch.librarymanagementsytem.Service.Bookservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +19,14 @@ public class BookController {
 
     @PostMapping("/add")
 
-    public String addBook(@RequestBody Book book){
-        try{
-            bookservice.addbook(book);
-        }
-        catch(Exception e){
-            throw new RuntimeException(e.getMessage()+"book not added");
-        }
-        return "Book added successfully";
+    public BookResponseDto addBook(@RequestBody BookRequestDto bookRequestDto) throws Exception {
+//        try{
+//            bookservice.addbook(book);
+//        }
+//        catch(Exception e){
+//            throw new RuntimeException(e.getMessage()+"book not added");
+//        }
+//        return "Book added successfully";
+    return bookservice.addbook(bookRequestDto);
     }
 }
